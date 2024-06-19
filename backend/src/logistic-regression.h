@@ -15,4 +15,6 @@ double* update_params(double* current_params, double* gradient, int size);
 
 double* predict(double *X, double* params, int n_rows, int n_cols);
 
+void hello();
+
 #endif

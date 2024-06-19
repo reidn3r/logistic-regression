@@ -54,3 +54,7 @@ double* predict(double *X, double* params, int n_rows, int n_cols){
     double* z = multiply_mat(X, params, n_rows, n_rows);
     return sigmoid(z, n_rows);
 }
+
+void hello(){
+    printf("Hello, world");
+}

@@ -1,7 +1,6 @@
-
 genlib:
 	gcc -c -fPIC *.c
-	gcc -shared -o lrlib.so *.o
+	gcc -shared -o library.so *.o
 
 clean:
 	rm -rf *.exe
