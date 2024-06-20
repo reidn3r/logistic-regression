@@ -17,7 +17,7 @@
 
     2.0: Os parâmetros do modelo são ajustados de acordo com o algoritmo de Gradiente Descendente
 
-    3.0: A classe pode ser importada e usada em outros arquivos
+    3.0: A classe pode ser importada e usada em outros arquivos 
 
 ## Função de custo:
 <p align="center">
