@@ -4,9 +4,9 @@
 
 double* multiply_mat(double* mat, double* array, int n_rows, int n_cols){
     /* 
-        - Multiplicação Matriz-Vetor: Caso onde x1 
+        - Multiplicação Matriz-Vetor: Caso onde mat 
             é uma matriz unidimensional (1D) e
-            x2 é uma matriz bidimensional (2D)
+            array é uma matriz bidimensional (2D)
 
         @array:  vetor unidimensional
         @mat:    vetor bidimensional
@@ -19,6 +19,19 @@ double* multiply_mat(double* mat, double* array, int n_rows, int n_cols){
         out[i] = 0.0;
         for(int j=0; j<n_cols; j++){
             out[i] += array[j] * mat[i*n_cols + j]; 
+        }
+    }
+    return out;
+}
+
+
+// Função corrigida para multiplicar um vetor 1D por uma matriz 2D
+double* multiply_mat_transpose(double* array, double* mat, int n_rows, int n_cols){
+    double* out = malloc(n_cols * sizeof(double));
+    for(int j = 0; j < n_cols; j++){
+        out[j] = 0.0;
+        for(int i = 0; i < n_rows; i++){
+            out[j] += array[i] * mat[i * n_cols + j];
         }
     }
     return out;

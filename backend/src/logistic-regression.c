@@ -14,7 +14,8 @@ double* sigmoid(double *z, int size){
 
 double* gradient(double *X, double *y, double *y_hat, int n_rows, int n_cols){
     double *array_diff = subtract(y, y_hat, n_rows);
-    double *out = multiply_mat(X, array_diff, n_rows, n_cols);
+    // double *out = multiply_mat(X, array_diff, n_rows, n_cols);
+    double *out = multiply_mat_transpose(array_diff, X, n_rows, n_cols);
     for(int i = 0; i < n_cols; i++){
         out[i] /= -n_rows;
     }
