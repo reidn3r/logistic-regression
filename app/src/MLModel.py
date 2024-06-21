@@ -5,7 +5,7 @@ import numpy as np
 class LogisticRegression():
     def __init__(self):
         self.params = None
-        self.epochs = 5000
+        self.epochs = 100
         self.h = Helper()
 
     def fit(self, X, y):
