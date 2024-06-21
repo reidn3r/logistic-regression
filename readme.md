@@ -1,5 +1,5 @@
 <h2 align="center"> ML: Logistic Regression </h2>
-<p align="center"> Logistic Regression Algorithm with Usability in Python (06/2024) (06/2024)</p>
+<p align="center"> Logistic Regression Algorithm with Usability in Python (06/2024)</p>
 
 <hr>
 
