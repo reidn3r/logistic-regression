@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "../include/logistic-regression.h"
-#include "../include/matrix-op.h"
+#include "../include/model.h"
+#include "../include/linear_alg.h"
 
 double* sigmoid(double *z, int size){
     double* out = (double *)malloc(size * sizeof(double));

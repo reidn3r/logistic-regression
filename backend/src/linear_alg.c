@@ -1,4 +1,4 @@
-#include "../include/matrix-op.h"
+#include "../include/linear_alg.h"
 #include <stdio.h>
 #include <stdlib.h>
 

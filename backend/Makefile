@@ -4,15 +4,15 @@ INCLUDE_DIR := ./include
 LIB_NAME := library.so
 LIBRARY_PATH := $(BUILD_DIR)/$(LIB_NAME)
 
-SRCS = $(SRC_DIR)/logistic-regression.c $(SRC_DIR)/matrix-op.c
-OBJS = $(BUILD_DIR)/logistic-regression.o $(BUILD_DIR)/matrix-op.o
+SRCS = $(SRC_DIR)/model.c $(SRC_DIR)/linear_alg.c
+OBJS = $(BUILD_DIR)/model.o $(BUILD_DIR)/linear_alg.o
 
 lib: $(OBJS)
-$(BUILD_DIR)/logistic-regression.o: $(SRC_DIR)/logistic-regression.c
-	gcc -fPIC -I $(INCLUDE_DIR) -c $(SRC_DIR)/logistic-regression.c -o $(BUILD_DIR)/logistic-regression.o
+$(BUILD_DIR)/model.o: $(SRC_DIR)/model.c
+	gcc -fPIC -I $(INCLUDE_DIR) -c $(SRC_DIR)/model.c -o $(BUILD_DIR)/model.o
 
-$(BUILD_DIR)/matrix-op.o: $(SRC_DIR)/matrix-op.c
-	gcc -fPIC -I $(INCLUDE_DIR) -lm -c $(SRC_DIR)/matrix-op.c -o $(BUILD_DIR)/matrix-op.o
+$(BUILD_DIR)/linear_alg.o: $(SRC_DIR)/linear_alg.c
+	gcc -fPIC -I $(INCLUDE_DIR) -lm -c $(SRC_DIR)/linear_alg.c -o $(BUILD_DIR)/linear_alg.o
 	gcc -shared -o $(LIBRARY_PATH) $(BUILD_DIR)/*.o
 
 clean:
