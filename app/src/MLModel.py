@@ -1,25 +1,34 @@
 from src.lib import lib
-from src.helper_function import Helper
 import numpy as np
+import ctypes
 
 class LogisticRegression():
     def __init__(self):
         self.params = None
-        self.epochs = 100
-        self.h = Helper()
+        self.epochs = 5_000
 
     def fit(self, X, y):
-        self.params = self.h.matrix2double(np.zeros(X.shape[1], dtype=np.float64))
-        X_cast, y = self.h.matrix2double(X.flatten()), self.h.matrix2double(y)
+        n_cols, n_rows = X.shape[1], X.shape[0]
+        self.params = np.zeros(n_cols, dtype=np.float64)
+        X_cast, y = X.flatten().astype(np.float64), y.astype(np.float64)
 
-        output_ptr = lib.fit(X_cast, y, self.params, X.shape[1], X.shape[0], self.epochs)
-        self.params = np.ctypeslib.as_array(output_ptr, shape=(X.shape[1],))
+        X_ptr = X_cast.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
+        y_ptr = y.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
+        params_ptr = self.params.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
+
+        output_ptr = lib.fit(X_ptr, y_ptr, params_ptr, n_cols, n_rows, self.epochs)
+        self.params = np.ctypeslib.as_array(output_ptr, shape=(n_cols,))
+        return;
 
     def predict(self, X):
-        self.params = self.h.matrix2double(self.params) if self.h.matrix2double(self.params) is None else self.params
-        
-        X_cast = self.h.matrix2double(X.flatten())
-        output_ptr = lib.predict(X_cast, self.h.matrix2double(self.params), X.shape[0], X.shape[1])
+        if X.shape[1] != self.params.size:
+            raise ValueError("Dimensões diferentes")
+
+        X_cast = X.flatten().astype(np.float64)
+        X_ptr = X_cast.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
+        params_ptr = self.params.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
+
+        output_ptr = lib.predict(X_ptr, params_ptr, X.shape[0], X.shape[1])
         return np.ctypeslib.as_array(output_ptr, shape=(X.shape[0],))
 
 
