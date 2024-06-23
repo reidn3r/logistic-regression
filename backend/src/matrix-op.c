@@ -2,42 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-double* multiply_mat(double* mat, double* array, int n_rows, int n_cols){
-    /* 
-        - Multiplicação Matriz-Vetor: Caso onde mat 
-            é uma matriz unidimensional (1D) e
-            array é uma matriz bidimensional (2D)
-
-        @array:  vetor unidimensional
-        @mat:    vetor bidimensional
-        @n_rows: numero de linhas de mat
-        @n_cols: numero de colunas de mat
-
-    */
-    double* out = malloc(n_rows*sizeof(double));
-    for(int i=0; i<n_rows; i++){
-        out[i] = 0.0;
-        for(int j=0; j<n_cols; j++){
-            out[i] += array[j] * mat[i*n_cols + j]; 
-        }
-    }
-    return out;
-}
-
-
-// Função corrigida para multiplicar um vetor 1D por uma matriz 2D
-double* multiply_mat_transpose(double* array, double* mat, int n_rows, int n_cols){
-    double* out = malloc(n_cols * sizeof(double));
-    for(int j = 0; j < n_cols; j++){
-        out[j] = 0.0;
-        for(int i = 0; i < n_rows; i++){
-            out[j] += array[i] * mat[i * n_cols + j];
-        }
-    }
-    return out;
-}
-
-
 double* subtract(double *a, double *b, int size){
     /*
         - Subtrai dois array's unidimensionai
@@ -55,3 +19,38 @@ double* subtract(double *a, double *b, int size){
     return out;
 }
 
+double* dot_1d_2d(double *y, double* X, int n_cols, int n_rows){
+    /*
+        - Produto entre vetor 1D e vetor 2D
+        @y: vetor 1D
+        @X: vetor 2D
+        @n_cols: num. de colunas do vetor 2D
+        @n_rows: num. de linhas do vetor 2D
+    */
+    double* out = (double *)malloc(n_cols * sizeof(double));
+    for(int j=0; j<n_cols; ++j){
+        out[j] = 0.0;
+        for(int i=0; i<n_rows; ++i){
+            out[j] += y[i] * X[i * n_cols + j];
+        }
+    }
+    return out;
+}
+
+double* dot_2d_1d(double* X, double* y, int n_cols, int n_rows){
+    /*
+        - Produto entre vetor 2D e vetor 1D
+        @y: vetor 1D
+        @X: vetor 2D
+        @n_cols: num. de colunas do vetor 2D
+        @n_rows: num. de linhas do vetor 2D
+    */
+    double* out = (double *)malloc(n_rows * sizeof(double));
+    for(int i=0; i<n_rows; ++i){
+        out[i] = 0.0;
+        for(int j=0; j<n_cols; ++j){
+            out[i] += X[i * n_cols + j] * y[j];
+        }
+    }
+    return out;
+}

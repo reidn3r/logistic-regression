@@ -1,6 +1,5 @@
 #ifndef LOGISTICREGRESSION_H
 #define LOGISTICREGRESSION_H
-#define LR 0.001
 
 double* sigmoid(double *z, int size);
 
