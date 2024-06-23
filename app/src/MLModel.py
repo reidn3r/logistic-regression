@@ -5,9 +5,8 @@ import ctypes
 class LogisticRegression():
     def __init__(self):
         self.params = None
-        self.epochs = 5_000
 
-    def fit(self, X, y):
+    def fit(self, X, y, epochs):
         n_cols, n_rows = X.shape[1], X.shape[0]
         self.params = np.zeros(n_cols, dtype=np.float64)
         X_cast, y = X.flatten().astype(np.float64), y.astype(np.float64)
@@ -16,7 +15,7 @@ class LogisticRegression():
         y_ptr = y.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
         params_ptr = self.params.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
 
-        output_ptr = lib.fit(X_ptr, y_ptr, params_ptr, n_cols, n_rows, self.epochs)
+        output_ptr = lib.fit(X_ptr, y_ptr, params_ptr, n_cols, n_rows, epochs)
         self.params = np.ctypeslib.as_array(output_ptr, shape=(n_cols,))
         return;
 

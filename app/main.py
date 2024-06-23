@@ -12,7 +12,7 @@ def load_dataset():
 def split(X, y, test_size=0.2):
     scaler = StandardScaler()
     X = scaler.fit_transform(X)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size)
     return X_train, X_test, y_train, y_test
 
 def main():
@@ -20,7 +20,7 @@ def main():
     X_train, X_test, y_train, y_test = split(X, y, 0.2)
 
     model = LogisticRegression()
-    model.fit(X_train, y_train)
+    model.fit(X_train, y_train, 10_000)
     y_pred = model.predict(X_test)
     y_pred_binary = (y_pred > 0.5).astype(int)
 
