@@ -44,12 +44,10 @@ int early_stopper(double* best_loss, double current_loss, double min_delta, int 
         - Para treinamento se current_iteration == patience
         - Continua treinamento se current_loss <= best_loss - min_delta
             - best_loss = current_loss 
-            - current_loss = best_loss 
             - current_iteration = 0
 
         - Continua treinamento se current_iteration < patience e current_loss >= best_loss - min_delta
             - best_loss = best_loss 
-            - current_loss = current_loss 
             - current_iteration = current_iteration + 1? 
     */
 
@@ -71,7 +69,6 @@ int early_stopper(double* best_loss, double current_loss, double min_delta, int 
 double* fit(double* X, double* y, double* params, int n_cols, int n_rows, int epochs){
     int stop, patience = 5, iter = 0;
     double loss = 0, maxloss = DBL_MAX;
-    double *z, *y_hat, *computed_gradient;
     for(int i = 0; i < epochs; i++){
         double* z = dot_2d_1d(X, params, n_cols, n_rows);
         double* y_hat = sigmoid(z, n_rows);
@@ -81,12 +78,8 @@ double* fit(double* X, double* y, double* params, int n_cols, int n_rows, int ep
 
         stop = early_stopper(&maxloss, loss, 0.005, patience, &iter, params);
         free(z); free(y_hat); free(computed_gradient);
-        if(stop == 1){
-            printf("stop epoch: %d\n", i);
-            break;
-        }
+        stop ? break : 0;
     }
-    printf("logloss: %f\n", loss);
     return params;
 }
 
