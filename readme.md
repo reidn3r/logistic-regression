@@ -5,7 +5,7 @@
 
 ### Architecture:
 <p align="center">
-    <img src="https://raw.githubusercontent.com/reidn3r/logistic-regression/896098fead281397ef184542cfdaa42a996d43d4/assets/architecture.png" alt="Model Architecture">
+    <img src="https://raw.githubusercontent.com/reidn3r/logistic-regression/main/assets/architecture.png" alt="Model Architecture">
 </p>
 
 ## Details:
@@ -32,6 +32,7 @@
 
     # Usage of the interface (class LogisticRegression)
     $ cd ./app
+    $ pip install -r requirements.txt
     $ python3 main.py
 ```
 
