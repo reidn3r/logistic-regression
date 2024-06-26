@@ -78,7 +78,7 @@ double* fit(double* X, double* y, double* params, int n_cols, int n_rows, int ep
 
         stop = early_stopper(&maxloss, loss, 0.005, patience, &iter, params);
         free(z); free(y_hat); free(computed_gradient);
-        stop ? break : 0;
+        if(stop) { break; }
     }
     return params;
 }
